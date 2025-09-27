@@ -2,10 +2,252 @@
 <html lang="ro">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <title>au.ro shop - Premium Store</title>
-<style>
-  :root{
+  <!-- Added mobile-first responsive CSS with proper breakpoints -->
+  <style>
+  /* Mobile-first responsive design */
+  @media (max-width: 319px) {
+    /* Extra small devices */
+    .watermark { font-size: 40px; top: 10%; }
+    .logo { height: 32px; width: 32px; font-size: 12px; }
+    .brand h1 { font-size: 14px; }
+    .brand p { display: none; }
+    .controls { gap: 4px; }
+    .lang-select, .mode-toggle, .settings-btn, .cart { 
+      padding: 4px 6px; font-size: 10px; 
+    }
+    .cart-count { min-width: 16px; height: 16px; font-size: 9px; }
+  }
+  
+  @media (min-width: 320px) and (max-width: 374px) {
+    /* Small phones */
+    .watermark { font-size: 45px; top: 10%; }
+    .logo { height: 36px; width: 36px; font-size: 13px; }
+    .brand h1 { font-size: 15px; }
+    .brand p { font-size: 9px; }
+    .controls { gap: 5px; }
+    .lang-select, .mode-toggle, .settings-btn, .cart { 
+      padding: 5px 7px; font-size: 11px; 
+    }
+    .cart-count { min-width: 17px; height: 17px; font-size: 10px; }
+  }
+  
+  @media (min-width: 375px) and (max-width: 424px) {
+    /* Medium phones */
+    .watermark { font-size: 50px; top: 10%; }
+    .logo { height: 40px; width: 40px; font-size: 14px; }
+    .brand h1 { font-size: 16px; }
+    .brand p { font-size: 10px; }
+    .controls { gap: 6px; }
+    .lang-select, .mode-toggle, .settings-btn, .cart { 
+      padding: 6px 8px; font-size: 12px; 
+    }
+    .cart-count { min-width: 18px; height: 18px; font-size: 11px; }
+  }
+  
+  @media (min-width: 425px) and (max-width: 767px) {
+    /* Large phones */
+    .watermark { font-size: 55px; top: 10%; }
+    .logo { height: 44px; width: 44px; font-size: 15px; }
+    .brand h1 { font-size: 17px; }
+    .brand p { font-size: 11px; }
+    .controls { gap: 7px; }
+    .lang-select, .mode-toggle, .settings-btn, .cart { 
+      padding: 7px 9px; font-size: 13px; 
+    }
+    .cart-count { min-width: 19px; height: 19px; font-size: 12px; }
+  }
+  
+  @media (max-width: 767px) {
+    /* Mobile hamburger menu */
+    .navbar {
+      padding: 12px 15px;
+      flex-wrap: wrap;
+    }
+    
+    .brand {
+      order: 1;
+      flex: 1;
+    }
+    
+    .hamburger {
+      order: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 10px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: currentColor;
+      margin: 2px 0;
+      transition: 0.3s;
+    }
+    
+    .controls {
+      order: 3;
+      display: none;
+      width: 100%;
+      margin-top: 15px;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .controls.active {
+      display: flex;
+    }
+    
+    .lang-select, .mode-toggle, .settings-btn, .cart {
+      width: 100%;
+      text-align: center;
+      padding: 12px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .hero {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .hero-left {
+      width: 100%;
+      padding: 15px;
+    }
+    
+    .hero h2 {
+      font-size: 20px;
+    }
+    
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+    }
+    
+    .img-wrap {
+      height: 150px;
+    }
+    
+    .img-wrap img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+    
+    .modal-card {
+      max-width: 100%;
+      margin: 0 10px;
+    }
+    
+    .modal-inner {
+      grid-template-columns: 1fr;
+      padding: 15px;
+    }
+    
+    .detail-img {
+      height: 250px;
+      max-width: 100%;
+      object-fit: cover;
+    }
+    
+    .close-x {
+      right: 15px;
+      top: 15px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .cart-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .cart-item img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+    }
+    
+    input, select, button, .btn {
+      min-height: 44px;
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .qty button {
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1023px) {
+    /* Tablets */
+    .watermark { font-size: 80px; top: 8%; }
+    .grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .img-wrap { height: 180px; }
+    .hero { flex-direction: row; }
+    .hero-left { width: 65%; }
+    .hamburger { display: none; }
+    .controls { display: flex; }
+  }
+  
+  @media (min-width: 1024px) {
+    /* Desktops */
+    .watermark { font-size: 120px; top: 6%; }
+    .hamburger { display: none; }
+    .controls { display: flex; }
+  }
+  
+  /* Mobile-first base styles */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px 60px;
+  }
+  
+  /* Ensure all images are responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Improve touch targets */
+  button, .btn, .cat-btn, .lang-select, .mode-toggle, .settings-btn, .cart {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  * {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+:root{
     --bg-1:#F8F6F1;
     --bg-2:#F1EDE6;
     --card-bg: #ffffff;
@@ -98,9 +340,25 @@
     cursor:pointer;
     box-shadow: var(--shadow);
     transition: transform .15s ease, box-shadow .15s;
+    color: inherit; /* Inherit text color from parent */
   }
-  .lang-select select{background:transparent;border:0;outline:none;font-weight:600}
-  .mode-toggle {display:flex;align-items:center;gap:8px;}
+  body.dark .lang-select, 
+  body.dark .mode-toggle, 
+  body.dark .settings-btn {
+    border:1px solid rgba(255,255,255,0.1);
+    color: white;
+  }
+  .lang-select select{
+    background:transparent;
+    border:0;
+    outline:none;
+    font-weight:600;
+    color: inherit; /* Inherit text color from parent */
+  }
+  body.dark .lang-select select {
+    color: white;
+  }
+.mode-toggle {display:flex;align-items:center;gap:8px;}
   .mode-toggle input{display:none}
   .toggle-pill{
     width:44px;height:24px;background:rgba(0,0,0,0.06);border-radius:30px;position:relative;
@@ -111,14 +369,17 @@
     box-shadow:0 4px 10px rgba(0,0,0,0.2);
   }
   body.dark .toggle-dot{ left:23px; background:var(--accent); }
-
   .cart {
     position:relative;
     cursor:pointer;
     padding:8px 12px;border-radius:10px;background:var(--card-bg); box-shadow:var(--shadow);
     display:flex;gap:8px;align-items:center;
+    color: inherit; /* Inherit text color from parent */
   }
-  .cart-count {
+  body.dark .cart {
+    color: white;
+  }
+.cart-count {
     min-width:22px;height:22px;border-radius:50%;background:var(--danger);color:white;font-size:12px;
     display:flex;align-items:center;justify-content:center;padding:0 6px;font-weight:700;
   }
@@ -142,8 +403,13 @@
   .cat-btn {
     padding:8px 14px;border-radius:12px;background:transparent;border:1px solid rgba(0,0,0,0.06);
     cursor:pointer;font-weight:600;transition:transform .12s, background .12s;
+    color: inherit; /* Inherit text color from parent */
   }
-  .cat-btn.active { background: linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; transform:translateY(-4px); }
+  body.dark .cat-btn {
+    border:1px solid rgba(255,255,255,0.1);
+    color: white;
+  }
+.cat-btn.active { background: linear-gradient(90deg,var(--accent),var(--accent-2)); color:white; transform:translateY(-4px); }
 
   /* product grid */
   .grid {
@@ -203,8 +469,21 @@
   .detail-img-container { position: relative; display: flex; align-items: center; justify-content: center; }
   .detail-img { width:100%; height:420px; object-fit:cover; border-radius:10px; }
   .detail-info { padding:10px 8px; }
-  .close-x { position:absolute; right:18px; top:12px; background:rgba(0,0,0,0.06); border-radius:8px; padding:6px 8px; cursor:pointer; }
-  .arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); color: white; border: none; padding: 10px; cursor: pointer; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; z-index: 10; }
+  .close-x { 
+    position: absolute; 
+    right: 18px; 
+    top: 12px; 
+    background: rgba(0,0,0,0.06); 
+    border-radius: 8px; 
+    padding: 6px 8px; 
+    cursor: pointer; 
+    z-index: 10; 
+  }
+  body.dark .close-x { 
+    background: rgba(255,255,255,0.1); 
+    color: white; 
+  }
+.arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); color: white; border: none; padding: 10px; cursor: pointer; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; z-index: 10; }
   .arrow.left { left: 10px; }
   .arrow.right { right: 10px; }
 
@@ -213,54 +492,36 @@
   .cart-item img { width:72px; height:72px; object-fit:cover; border-radius:8px }
   .cart-empty { padding:40px; text-align:center; color:var(--muted) }
 
-  /* Responsive styles */
+  /* small responsive */
   @media (max-width:900px){
     .modal-inner { grid-template-columns: 1fr; }
     .detail-img { height:300px }
-    .hero { flex-direction: column; }
-    .hero-left { max-width: 100%; }
-    .hero > div:last-child { width: 100%; margin-top: 20px; }
-    .grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-    .navbar { padding: 10px 12px; }
-    .logo { height: 36px; width: 36px; font-size: 14px; }
-    .brand h1 { font-size: 16px; }
-    .brand p { font-size: 10px; }
-    .controls { gap: 6px; }
-    .lang-select, .mode-toggle, .settings-btn, .cart { padding: 6px 8px; font-size: 12px; }
-    .toggle-pill { width: 36px; height: 20px; }
-    .toggle-dot { width: 14px; height: 14px; top: 3px; }
-    body.dark .toggle-dot { left: 19px; }
-    .watermark { font-size: 60px; top: 12%; }
-  }
-
-  @media (max-width:480px) {
-    .container { padding: 0 12px 60px; }
-    .hero h2 { font-size: 22px; }
-    .hero p { font-size: 14px; }
-    .cat-btn { padding: 6px 10px; font-size: 12px; }
-    .grid { gap: 12px; }
-    .img-wrap { height: 160px; }
-    .title { font-size: 14px; }
-    .price { font-size: 16px; }
-    .desc { font-size: 12px; }
-    .btn { padding: 8px 12px; font-size: 12px; }
-    .modal-card { border-radius: 0; }
-    .detail-img { height: 220px; }
-    .cart-item { flex-direction: column; align-items: flex-start; }
-    .cart-item img { width: 100%; height: auto; max-height: 120px; }
+    .close-x {
+      right: 12px;
+      top: 12px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 8px 10px;
+    }
   }
 </style>
 </head>
 <body>
-  <div class="watermark">Good Stuf</div>
-
-  <nav class="navbar">
+  <div class="watermark" style="pointer-events:none">Good Stuf</div>
+<nav class="navbar">
     <div class="brand">
       <div class="logo">GS</div>
       <div>
         <h1>Good Stuf Shop</h1>
         <p id="slogan">Premium Collection</p>
       </div>
+    </div>
+
+    <!-- Mobile hamburger menu -->
+    <div class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu" role="button">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
 
     <div class="controls">
@@ -274,21 +535,20 @@
 
       <div class="mode-toggle" title="Light / Dark">
         <div style="font-size:12px;margin-right:6px" id="modeLabel">Light</div>
-        <label class="toggle-pill" onclick="toggleTheme()">
+        <label class="toggle-pill" onclick="toggleTheme()" role="button" tabindex="0">
           <div class="toggle-dot"></div>
         </label>
       </div>
 
-      <div class="settings-btn btn ghost" onclick="openSettings()">Settings</div>
+      <div class="settings-btn btn ghost" onclick="openSettings()" role="button" tabindex="0">Settings</div>
 
-      <div class="cart" onclick="openCart()">
+      <div class="cart" onclick="openCart()" role="button" tabindex="0">
         🛒 <div style="margin-left:8px">Cart</div>
         <div class="cart-count" id="cartCount">0</div>
       </div>
     </div>
   </nav>
-
-  <main class="container">
+<main class="container">
     <section class="hero">
       <div class="hero-left">
         <h2 id="heroTitle">Premium Collection</h2>
@@ -307,8 +567,8 @@
         <div style="padding:18px;border-radius:12px;background:var(--glass);box-shadow:var(--shadow)">
           <h3 id="quickTitle">Most Popular</h3>
           <p id="quickDesc" style="color:var(--muted)">Our top products</p>
-          <div style="margin-top:10px"><button class="btn" onclick="showPopular()"><span id="btnSettings">See top products</span></button></div>
-        </div>
+          <div style="margin-top:10px"><button class="btn" onclick="showPopular()" style="width:100%"><span id="btnSettings">See top products</span></button></div>
+</div>
       </div>
     </section>
 
@@ -320,10 +580,10 @@
   <!-- Product Detail Modal -->
   <div id="detailModal" class="modal" aria-hidden="true">
     <div class="modal-card">
-      <div style="position:relative">
-        <div class="close-x" onclick="closeDetail()">✕</div>
-      </div>
-      <div class="modal-inner">
+  <div style="position:relative">
+    <div class="close-x" onclick="closeDetail()" style="font-size:20px;padding:8px 12px">✕</div>
+  </div>
+<div class="modal-inner">
         <div class="detail-img-container">
           <button class="arrow left" onclick="changeImage(-1)">❮</button>
           <img id="detailImg" class="detail-img" src="" alt="product image" />
@@ -334,9 +594,8 @@
           <h2 id="detailName"></h2>
           <div class="price" id="detailPrice"></div>
           <p id="detailDesc" class="desc"></p>
-
-          <div style="margin-top:14px; display:flex; gap:10px; align-items:center;">
-            <div class="qty" style="align-items:center;">
+      <div style="margin-top:14px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+<div class="qty" style="align-items:center;">
               <button onclick="changeModalQty(-1)">-</button>
               <input id="modalQty" type="number" value="1" min="1" style="width:48px;background:transparent;color:inherit">
               <button onclick="changeModalQty(1)">+</button>
@@ -384,8 +643,9 @@
         <div>
           <label style="font-weight:700">Credits</label>
           <div style="margin-top:8px;padding:12px;border-radius:10px;background:var(--glass)">
-            <div><strong>Made by:</strong> Darius Ghigeanu — website developer, designer and scripter</div>
-            <div style="margin-top:8px"><strong>Shipping & Distribution:</strong> Iosua Paunescu</div>
+            <div><strong>Made by:</strong> Darius — code & design</div>
+            <div><strong>Distribution & Shipping:</strong> Iosua</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:8px">You can edit these credits in settings to show your team.</div>
           </div>
         </div>
 
@@ -403,8 +663,27 @@
       </div>
     </div>
   </div>
-
 <script>
+// Device detection for mobile/desktop classes
+function detectDevice() {
+  const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                  (window.innerWidth <= 768);
+  
+  if (isMobile) {
+    document.body.classList.add('is-mobile');
+    document.body.classList.remove('is-desktop');
+  } else {
+    document.body.classList.add('is-desktop');
+    document.body.classList.remove('is-mobile');
+  }
+}
+
+// Toggle mobile menu
+function toggleMobileMenu() {
+  const controls = document.querySelector('.controls');
+  controls.classList.toggle('active');
+}
+
 /* ---------- Data ---------- */
 const products = [
   { id:1, brand:"Ralph Lauren", name_ro:"Ralph Lauren T-Shirt", name_en:"Ralph Lauren T-Shirt", name_de:"Ralph Lauren T-Shirt",
@@ -696,8 +975,11 @@ function updateCartUI(){
       </div>`;
     });
     html += `<div style="padding:12px"><div class="cart-total">Total: ${currency(total)}</div>
-      <div style="margin-top:12px;display:flex;gap:8px"><button class="btn ghost" onclick="closeCart()">Continue shopping</button>
-      <button class="btn" onclick="checkout()">${getText('checkout')}</button></div></div>`;
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn ghost" onclick="closeCart()" style="flex:1">Continue shopping</button>
+          <button class="btn" onclick="checkout()" style="flex:1">${getText('checkout')}</button>
+        </div>
+</div>`;
     list.innerHTML = html;
   }
   document.getElementById('cartCount').textContent = cart.reduce((s,i)=>s+i.qty,0);
@@ -828,17 +1110,19 @@ function loadState(){
 
 /* util safe escape */
 function escapeHtml(s){ return String(s).replace(/[&<>"]/g, c=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])) }
-
 /* init */
 function init(){
+  detectDevice(); // Detect device type
   loadState();
   setLang(lang);
   setTheme(theme);
   renderProducts();
   updateCartUI();
+  
+  // Add resize listener for device detection
+  window.addEventListener('resize', detectDevice);
 }
 init();
-
 /* close modals when clicking outside */
 window.addEventListener('click', (ev)=>{
   const d = document.getElementById('detailModal');
@@ -847,7 +1131,21 @@ window.addEventListener('click', (ev)=>{
   if(ev.target === c) closeCart();
   const s = document.getElementById('settingsModal');
   if(ev.target === s) closeSettings();
+  
+  // Close mobile menu when clicking outside
+  if (!ev.target.closest('.controls') && !ev.target.closest('.hamburger') && 
+      document.querySelector('.controls').classList.contains('active')) {
+    document.querySelector('.controls').classList.remove('active');
+  }
 });
+
+// Prevent default on touch events for better mobile performance
+document.addEventListener('touchstart', function(e) {
+  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') {
+    return;
+  }
+  e.preventDefault();
+}, { passive: false });
 </script>
 </body>
 </html>
