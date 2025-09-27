@@ -6,10 +6,9 @@
 <title>au.ro shop - Premium Store</title>
   <!-- Added mobile-first responsive CSS with proper breakpoints -->
   <style>
-  /* Mobile-first responsive design */
+/* Mobile-first responsive design */
   @media (max-width: 319px) {
     /* Extra small devices */
-    .watermark { font-size: 40px; top: 10%; }
     .logo { height: 32px; width: 32px; font-size: 12px; }
     .brand h1 { font-size: 14px; }
     .brand p { display: none; }
@@ -22,7 +21,6 @@
   
   @media (min-width: 320px) and (max-width: 374px) {
     /* Small phones */
-    .watermark { font-size: 45px; top: 10%; }
     .logo { height: 36px; width: 36px; font-size: 13px; }
     .brand h1 { font-size: 15px; }
     .brand p { font-size: 9px; }
@@ -35,7 +33,6 @@
   
   @media (min-width: 375px) and (max-width: 424px) {
     /* Medium phones */
-    .watermark { font-size: 50px; top: 10%; }
     .logo { height: 40px; width: 40px; font-size: 14px; }
     .brand h1 { font-size: 16px; }
     .brand p { font-size: 10px; }
@@ -48,7 +45,6 @@
   
   @media (min-width: 425px) and (max-width: 767px) {
     /* Large phones */
-    .watermark { font-size: 55px; top: 10%; }
     .logo { height: 44px; width: 44px; font-size: 15px; }
     .brand h1 { font-size: 17px; }
     .brand p { font-size: 11px; }
@@ -58,8 +54,7 @@
     }
     .cart-count { min-width: 19px; height: 19px; font-size: 12px; }
   }
-  
-  @media (max-width: 767px) {
+@media (max-width: 767px) {
     /* Mobile hamburger menu */
     .navbar {
       padding: 12px 15px;
@@ -288,21 +283,6 @@
   }
   body.dark { color: #eee; }
   /* watermark / textured background text */
-  .watermark {
-    position:fixed;
-    left:50%;
-    top:6%;
-    transform:translateX(-50%);
-    font-size:120px;
-    font-weight:800;
-    color: rgba(0,0,0,0.03);
-    pointer-events:none;
-    user-select:none;
-    letter-spacing:6px;
-    text-transform:uppercase;
-    mix-blend-mode:overlay;
-    z-index: -1; /* Ensure it stays behind all interactive elements */
-  }
 body.dark .watermark { color: rgba(255,255,255,0.02); }
 
   /* NAV */
@@ -462,8 +442,9 @@ body.dark .watermark { color: rgba(255,255,255,0.02); }
     position:fixed;left:0;top:0;width:100%;height:100%;display:none;
     align-items:center;justify-content:center; background: rgba(0,0,0,0.6); z-index:200;
     padding:20px;
+    pointer-events: auto; /* Ensure modal is interactive */
   }
-  .modal.show{ display:flex }
+.modal.show{ display:flex }
   .modal-card { width:100%; max-width:980px; border-radius:14px; background:var(--card-bg); overflow:hidden; box-shadow:var(--shadow) }
   .modal-inner { display:grid; grid-template-columns: 1fr 1fr; gap:18px; padding:20px }
   .detail-img-container { position: relative; display: flex; align-items: center; justify-content: center; }
@@ -491,8 +472,7 @@ body.dark .watermark { color: rgba(255,255,255,0.02); }
   .cart-item { display:flex; gap:12px; align-items:center; padding:12px; border-bottom:1px solid rgba(0,0,0,0.04) }
   .cart-item img { width:72px; height:72px; object-fit:cover; border-radius:8px }
   .cart-empty { padding:40px; text-align:center; color:var(--muted) }
-
-  /* small responsive */
+/* small responsive */
   @media (max-width:900px){
     .modal-inner { grid-template-columns: 1fr; }
     .detail-img { height:300px }
@@ -502,12 +482,12 @@ body.dark .watermark { color: rgba(255,255,255,0.02); }
       background: rgba(0,0,0,0.5);
       color: white;
       padding: 8px 10px;
+      z-index: 1000; /* Ensure close button is above all */
     }
   }
 </style>
 </head>
 <body>
-  <div class="watermark">Good Stuf</div>
 <nav class="navbar">
     <div class="brand">
       <div class="logo">GS</div>
@@ -684,6 +664,21 @@ function toggleMobileMenu() {
   controls.classList.toggle('active');
 }
 
+// Fix all interactive elements for mobile
+function fixMobileInteractivity() {
+  // Ensure all buttons and interactive elements have proper cursor and pointer events
+  const interactiveElements = document.querySelectorAll('button, .btn, .cat-btn, .lang-select, .mode-toggle, .settings-btn, .cart, select, input');
+  interactiveElements.forEach(el => {
+    el.style.cursor = 'pointer';
+    el.style.pointerEvents = 'auto';
+  });
+  
+  // Ensure modals don't block content behind them
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    modal.style.pointerEvents = 'auto';
+  });
+}
 /* ---------- Data ---------- */
 const products = [
   { id:1, brand:"Ralph Lauren", name_ro:"Ralph Lauren T-Shirt", name_en:"Ralph Lauren T-Shirt", name_de:"Ralph Lauren T-Shirt",
@@ -1118,9 +1113,13 @@ function init(){
   setTheme(theme);
   renderProducts();
   updateCartUI();
+  fixMobileInteractivity(); // Fix mobile interactivity
   
   // Add resize listener for device detection
   window.addEventListener('resize', detectDevice);
+  
+  // Re-apply interactivity fixes after any DOM changes
+  setTimeout(fixMobileInteractivity, 100);
 }
 init();
 /* close modals when clicking outside */
@@ -1141,6 +1140,4 @@ window.addEventListener('click', (ev)=>{
 </script>
 </body>
 </html>
-
-
 
