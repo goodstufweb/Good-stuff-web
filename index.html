@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>au.ro shop - Premium Store</title>
   <!-- Added mobile-first responsive CSS with proper breakpoints -->
   <style>
@@ -287,7 +287,6 @@
     overflow-y:auto;
   }
   body.dark { color: #eee; }
-
   /* watermark / textured background text */
   .watermark {
     position:fixed;
@@ -302,8 +301,9 @@
     letter-spacing:6px;
     text-transform:uppercase;
     mix-blend-mode:overlay;
+    z-index: -1; /* Ensure it stays behind all interactive elements */
   }
-  body.dark .watermark { color: rgba(255,255,255,0.02); }
+body.dark .watermark { color: rgba(255,255,255,0.02); }
 
   /* NAV */
   .navbar{
@@ -507,7 +507,7 @@
 </style>
 </head>
 <body>
-  <div class="watermark" style="pointer-events:none">Good Stuf</div>
+  <div class="watermark">Good Stuf</div>
 <nav class="navbar">
     <div class="brand">
       <div class="logo">GS</div>
@@ -1138,16 +1138,9 @@ window.addEventListener('click', (ev)=>{
     document.querySelector('.controls').classList.remove('active');
   }
 });
-
-// Prevent default on touch events for better mobile performance
-document.addEventListener('touchstart', function(e) {
-  if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') {
-    return;
-  }
-  e.preventDefault();
-}, { passive: false });
 </script>
 </body>
 </html>
+
 
 
